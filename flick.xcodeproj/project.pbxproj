@@ -12,6 +12,8 @@
 		0D25CA9721B99EB200B61F5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D25CA9521B99EB200B61F5E /* Main.storyboard */; };
 		0D25CA9921B99EBA00B61F5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D25CA9821B99EBA00B61F5E /* Assets.xcassets */; };
 		0D25CA9C21B99EBA00B61F5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D25CA9A21B99EBA00B61F5E /* LaunchScreen.storyboard */; };
+		0D25CAA421B9A23400B61F5E /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D25CAA321B9A23400B61F5E /* PhotoCell.swift */; };
+		58309485E4C83D31C0496213 /* Pods_flick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF950390E46FF0A5E5381F0E /* Pods_flick.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,10 @@
 		0D25CA9821B99EBA00B61F5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D25CA9B21B99EBA00B61F5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D25CA9D21B99EBA00B61F5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D25CAA321B9A23400B61F5E /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		BF950390E46FF0A5E5381F0E /* Pods_flick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE82CF25F7D13B6C228F8117 /* Pods-flick.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flick.release.xcconfig"; path = "Pods/Target Support Files/Pods-flick/Pods-flick.release.xcconfig"; sourceTree = "<group>"; };
+		F5836BCD9591D65385DEF3CE /* Pods-flick.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flick.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flick/Pods-flick.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58309485E4C83D31C0496213 /* Pods_flick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				0D25CA9021B99EB200B61F5E /* flick */,
 				0D25CA8F21B99EB200B61F5E /* Products */,
+				1D3AFF68991A28131973E40D /* Pods */,
+				CA2723711B56D9C9073CA29A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,11 +66,29 @@
 				0D25CA9121B99EB200B61F5E /* AppDelegate.swift */,
 				0D25CA9321B99EB200B61F5E /* ViewController.swift */,
 				0D25CA9521B99EB200B61F5E /* Main.storyboard */,
+				0D25CAA321B9A23400B61F5E /* PhotoCell.swift */,
 				0D25CA9821B99EBA00B61F5E /* Assets.xcassets */,
 				0D25CA9A21B99EBA00B61F5E /* LaunchScreen.storyboard */,
 				0D25CA9D21B99EBA00B61F5E /* Info.plist */,
 			);
 			path = flick;
+			sourceTree = "<group>";
+		};
+		1D3AFF68991A28131973E40D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F5836BCD9591D65385DEF3CE /* Pods-flick.debug.xcconfig */,
+				DE82CF25F7D13B6C228F8117 /* Pods-flick.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CA2723711B56D9C9073CA29A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF950390E46FF0A5E5381F0E /* Pods_flick.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D25CAA021B99EBA00B61F5E /* Build configuration list for PBXNativeTarget "flick" */;
 			buildPhases = (
+				52539D6259C86DFB9715596E /* [CP] Check Pods Manifest.lock */,
 				0D25CA8A21B99EB200B61F5E /* Sources */,
 				0D25CA8B21B99EB200B61F5E /* Frameworks */,
 				0D25CA8C21B99EB200B61F5E /* Resources */,
+				1600FF23E2D26363666083DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,12 +159,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1600FF23E2D26363666083DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-flick/Pods-flick-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-flick/Pods-flick-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52539D6259C86DFB9715596E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-flick-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0D25CA8A21B99EB200B61F5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0D25CA9421B99EB200B61F5E /* ViewController.swift in Sources */,
+				0D25CAA421B9A23400B61F5E /* PhotoCell.swift in Sources */,
 				0D25CA9221B99EB200B61F5E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +363,7 @@
 		};
 		0D25CAA121B99EBA00B61F5E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5836BCD9591D65385DEF3CE /* Pods-flick.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -297,6 +381,7 @@
 		};
 		0D25CAA221B99EBA00B61F5E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE82CF25F7D13B6C228F8117 /* Pods-flick.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
