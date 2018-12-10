@@ -11,31 +11,29 @@ import Alamofire
 import SwiftyJSON
 //import SDWebImage
 import Kingfisher
+import MBProgressHUD
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    var imageArray = [UIImage]()
+    
+//    var imageArray = [UIImage]()
     let flickURL = "https://api.flickr.com/services/rest"
     var downloadURL:String = ""
     var downloadArray = [String]()
-    var testURL = URL(string: "https://r.hswstatic.com/w_907/gif/tesla-cat.jpg")
-    var testURL2 = [String]()
-    
-    
-    
+    var pageNo:Int = 0
+    var numberCheck:Int = 14
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        request(lookFor: "Basketball")
         searchBar.delegate = self
         collectionView.delegate = self
         
     }
 
-    
+    //MARK:- CollectionView Stubs
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return downloadArray.count
     }
@@ -43,57 +41,41 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "viewCell", for: indexPath) as! PhotoCell
-
-//        request(lookFor: "Basketball")
-//        cell.imageView.sd_setImage(with: URL(string: downloadURL))
-        
-//        testURL2.append("https://www.washingtonpost.com/resizer/rmmBUcybIzdfzbuOeeybgskFYko=/480x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/CCWE4SVKQQI6RGT5ZUYFAT7ZAI.jpg")
-//        testURL2.append("https://r.hswstatic.com/w_907/gif/tesla-cat.jpg")
-        
-//        let url = URL(string: downloadArray[indexPath.row])
-//        let data = try? Data(contentsOf: url!)
-//        var asd = UIImage(data: data!)
-//        imageArray.append(asd!)
-        
-//        if !downloadArray.isEmpty{
-//            getImages(indexPath: indexPath)
-//            cell.imageView.image = imageArray[indexPath.row]
-//        }
         if !downloadArray.isEmpty{
-        let urls = URL(string: downloadArray[indexPath.row])
-        cell.imageView.kf.setImage(with: urls)
+            let urls = URL(string: downloadArray[indexPath.row])
+            cell.imageView.kf.setImage(with: urls)
         }
         
-//        collectionView.reloadData()
-        
-//        cell.imageView.sd_setImage(with: URL(string : downloadURL))
-//        cell.imageView.kf.setImage(with: testURL)
-//        testURL = URL(string : "https://www.washingtonpost.com/resizer/rmmBUcybIzdfzbuOeeybgskFYko=/480x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/CCWE4SVKQQI6RGT5ZUYFAT7ZAI.jpg")
-//        cell.imageView.kf.setImage(with: testURL)
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Item number \(indexPath.row) is selected")
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // height is 584.0, width is 375.0
+        return CGSize(width: 115 , height: 115 )
+    }
+  
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        print("in DisplayCell")
+        print("IP \(indexPath.row)")
+        print("DA \(downloadArray.count)")
         
+        
+        if indexPath.row == downloadArray.count - 1 {
+            print("indexPath equals to ImageArray")
+            pageNo = pageNo + 1
+            request(lookFor: searchBar.text!)
+        }
     }
     
     
     
-//    func getImages(indexPath : IndexPath){
-//
-////        testURL2.append("https://www.washingtonpost.com/resizer/rmmBUcybIzdfzbuOeeybgskFYko=/480x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/CCWE4SVKQQI6RGT5ZUYFAT7ZAI.jpg")
-////        testURL2.append("https://r.hswstatic.com/w_907/gif/tesla-cat.jpg")
-//
-//        let urls = URL(string: downloadArray[indexPath.row])
-//        do{
-//            let data = try Data(contentsOf: urls!)
-//            var asd = UIImage(data: data)
-//            imageArray.append(asd!)
-//        }catch{
-//            print("empty array...\(error)")
-//        }
-//
-//    }
     
-    
+    //MARK:- Alamofire request
     func request (lookFor : String){
         
         let parameters : [String : String] = [
@@ -102,49 +84,62 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             "text" : lookFor,
             "format" : "json",
             "nojsoncallback" : "1",
+            "per_page" : "20",
+            "page" : String(pageNo),
             ]
+        
+//        showHUD(progressLabel: "Please wait...")
         
         Alamofire.request(flickURL, method: .get, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess{
                 print("Got Flickr info")
-//                print(JSON(response.result.value))
                 
                 let photoJSON:JSON = JSON(response.result.value!)
                 
-                for i in 0..<90{
+                for i in 0..<20{
                 
                 let serverId = photoJSON["photos"]["photo"][i]["server"].stringValue
                 let farmId = photoJSON["photos"]["photo"][i]["farm"].stringValue
                 let Id = photoJSON["photos"]["photo"][i]["id"].stringValue
                 let secret = photoJSON["photos"]["photo"][i]["secret"].stringValue
-                
                 self.downloadURL = "https://farm\(farmId).staticflickr.com/\(serverId)/\(Id)_\(secret).jpg"
-                
                 self.downloadArray.append(self.downloadURL)
-//                print(self.downloadArray)
                 self.collectionView.reloadData()
                 }
             }
         }
     }
     
+    //MARK:- Test Button
     @IBAction func testButton(_ sender: UIButton) {
         request(lookFor: "Basketball")
         print(downloadArray)
         print("Button Pressed")
         collectionView.reloadData()
-        
     }
     
+    //MARK:- SearchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text!)
+//        print(searchBar.text!)
+        deleteItems()
         request(lookFor: searchBar.text!)
         collectionView.reloadData()
-        
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // height and width is 584.0
-        return CGSize(width: 180 , height: 170 )
+    
+    //MARK:- Delete Cells for new Search
+    func deleteItems(){
+        downloadArray.removeAll()
+    }
+    
+    //MARK:- ProgressHUD
+    func showHUD(progressLabel : String){
+        
+        let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHUD.label.text = progressLabel
+    }
+    
+    func dissmissHUD(isAnimated : Bool){
+        MBProgressHUD.hide(for : self.view, animated: isAnimated)
     }
 }
 
