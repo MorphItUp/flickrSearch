@@ -13,5 +13,6 @@ pod 'SwiftyJSON'
 pod 'Kingfisher'
 pod 'MBProgressHUD', '~> 1.1.0'
 pod 'ObjectMapper'
+pod 'ReachabilitySwift'
 
 end

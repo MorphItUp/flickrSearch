@@ -13,6 +13,7 @@
 		0D25CA9921B99EBA00B61F5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D25CA9821B99EBA00B61F5E /* Assets.xcassets */; };
 		0D25CA9C21B99EBA00B61F5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D25CA9A21B99EBA00B61F5E /* LaunchScreen.storyboard */; };
 		0D25CAA421B9A23400B61F5E /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D25CAA321B9A23400B61F5E /* PhotoCell.swift */; };
+		0DC209B521BF5447004477FE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC209B421BF5447004477FE /* SecondViewController.swift */; };
 		58309485E4C83D31C0496213 /* Pods_flick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF950390E46FF0A5E5381F0E /* Pods_flick.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		0D25CA9B21B99EBA00B61F5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D25CA9D21B99EBA00B61F5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D25CAA321B9A23400B61F5E /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		0DC209B421BF5447004477FE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = /Users/murphy/Desktop/flick/flick/SecondViewController.swift; sourceTree = "<absolute>"; };
 		BF950390E46FF0A5E5381F0E /* Pods_flick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE82CF25F7D13B6C228F8117 /* Pods-flick.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flick.release.xcconfig"; path = "Pods/Target Support Files/Pods-flick/Pods-flick.release.xcconfig"; sourceTree = "<group>"; };
 		F5836BCD9591D65385DEF3CE /* Pods-flick.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flick.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flick/Pods-flick.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			children = (
 				0D25CA9121B99EB200B61F5E /* AppDelegate.swift */,
 				0D25CA9321B99EB200B61F5E /* ViewController.swift */,
+				0DC209B421BF5447004477FE /* SecondViewController.swift */,
 				0D25CA9521B99EB200B61F5E /* Main.storyboard */,
 				0D25CAA321B9A23400B61F5E /* PhotoCell.swift */,
 				0D25CA9821B99EBA00B61F5E /* Assets.xcassets */,
@@ -173,6 +176,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -184,6 +188,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -221,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DC209B521BF5447004477FE /* SecondViewController.swift in Sources */,
 				0D25CA9421B99EB200B61F5E /* ViewController.swift in Sources */,
 				0D25CAA421B9A23400B61F5E /* PhotoCell.swift in Sources */,
 				0D25CA9221B99EB200B61F5E /* AppDelegate.swift in Sources */,

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/murphy/Desktop/flick/flick/SecondViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:flick.xcodeproj">
    </FileRef>
    <FileRef

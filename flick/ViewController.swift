@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-//import SDWebImage
 import Kingfisher
 import MBProgressHUD
+import Reachability
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UICollectionViewDelegateFlowLayout{
     
@@ -23,7 +23,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var downloadURL:String = ""
     var downloadArray = [String]()
     var pageNo:Int = 0
-    var numberCheck:Int = 14
+    var numberCheck:Int = 11
+//    var imageee : RetrieveImageTask
+    var selectedImage = UIImageView()
+    var secondViewDownloadURL = URL(string: "")
+    let reachability = Reachability()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +35,34 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         searchBar.delegate = self
         collectionView.delegate = self
         
+        
+        //MARK:- Reachability, WIFI CONNECTION CHECK
+        reachability?.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                print("Reachable via Wifi")
+            } else {
+                print("Reachable via Cellular")
+            }
+        }
+
+        reachability?.whenUnreachable = { _ in
+            print("not reachable")
+            let alert = UIAlertController(title: "Need Connection", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+
+        do {
+            try reachability?.stopNotifier()
+        } catch {
+            print("unable to start notifier")
+        }
     }
+    
+    
+    
 
     //MARK:- CollectionView Stubs
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -44,13 +75,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if !downloadArray.isEmpty{
             let urls = URL(string: downloadArray[indexPath.row])
             cell.imageView.kf.setImage(with: urls)
+        
         }
         
         return cell
     }
+
     
+    //MARK:- Did select an item, Segue
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item number \(indexPath.row) is selected")
+        secondViewDownloadURL = URL(string: downloadArray[indexPath.row])
+        performSegue(withIdentifier: "naviToImage", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "naviToImage" {
+            if let destinationVC = segue.destination as? SecondViewController{
+                destinationVC.secondImageView = selectedImage
+                destinationVC.downloadURLPassedOver = secondViewDownloadURL
+            }
+        }
     }
     
     
@@ -73,8 +119,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     
-    
-    
     //MARK:- Alamofire request
     func request (lookFor : String){
         
@@ -88,7 +132,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             "page" : String(pageNo),
             ]
         
-//        showHUD(progressLabel: "Please wait...")
+        showHUD(progressLabel: "Please wait...")
         
         Alamofire.request(flickURL, method: .get, parameters: parameters).responseJSON { (response) in
             if response.result.isSuccess{
@@ -107,6 +151,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 self.collectionView.reloadData()
                 }
             }
+            self.dissmissHUD(isAnimated: true)
         }
     }
     
@@ -141,5 +186,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func dissmissHUD(isAnimated : Bool){
         MBProgressHUD.hide(for : self.view, animated: isAnimated)
     }
+    
+//    enum Connection {
+//        case none, wifi, cellular
+//    }
+//    var connection: Connection
+    
 }
 
